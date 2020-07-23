@@ -1,6 +1,9 @@
 package com.athreshkiran.backgroundservicetest;
 
 import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Binder;
 import android.os.IBinder;
@@ -40,10 +43,17 @@ public class RandomNumService extends android.app.Service {
     @Override
     public void onCreate() {
         super.onCreate();
+
+        Intent fsIntent = new Intent(this, FullscreenActivity.class);
+        PendingIntent fsPendingIntent = PendingIntent.getActivity(this, 0, fsIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+
         Notification notification =new NotificationCompat.Builder(this,CHANNEL_ID)
                 .setContentText(Double.toString(RandomNumber))
                 .setContentTitle("Random Number Service")
                 .setSmallIcon(R.drawable.ic_baseline_call_made_24)
+                .setPriority(NotificationCompat.PRIORITY_HIGH)
+                .setCategory(NotificationCompat.CATEGORY_CALL)
+                .setFullScreenIntent(fsPendingIntent, true)
                 .build();
         startForeground(1,notification);
     }

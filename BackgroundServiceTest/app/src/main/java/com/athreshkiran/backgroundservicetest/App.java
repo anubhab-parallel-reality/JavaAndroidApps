@@ -17,7 +17,7 @@ public class App extends Application {
     private void createNotificationChannels(){
         if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.O) {
             NotificationChannel serviceChannel = new NotificationChannel(
-                    CHANNEL_ID, "Random Number Notification from Service", NotificationManager.IMPORTANCE_LOW
+                    CHANNEL_ID, "Random Number Notification from Service", NotificationManager.IMPORTANCE_HIGH
             );
             NotificationManager notificationManager = getSystemService(NotificationManager.class);
             notificationManager.createNotificationChannel(serviceChannel);
